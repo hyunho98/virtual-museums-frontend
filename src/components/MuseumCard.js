@@ -2,26 +2,34 @@ import React, { useState } from "react"
 import { Card, Button } from "semantic-ui-react"
 import { Redirect } from "react-router-dom"
 
-function MuseumCard(museum) {
-    const [redirect, setRedirect] = useState(false)
+function MuseumCard({ id, name, capacity, image_link }) {
+    const [editDirect, setEditDirect] = useState(false)
+    const [viewDirect, setViewDirect] = useState(false)
 
     function editHandler() {
-        setRedirect(() => true)
+        setEditDirect(() => true)
     }
 
-    if (redirect) return <Redirect to={`/museums/${museum.id}/edit`} />
+    function viewHandler() {
+        setViewDirect(() => true)
+    }
+
+    // if (editDirect) return <Redirect to={`/museums/${id}/edit`} />
 
     return (
         <Card>
             <div>
                 <div>
-                    <img src={museum.image_link} alt="missing image" />
+                    <img src={image_link} alt="missing image" />
                 </div>
                 <div>
-                    <h3>{museum.name}</h3>
-                    <h4>Capacity: {museum.artists.length} out of {museum.capacity}</h4>
-                    <Button onClick={editHandler}>
+                    <h3>{name}</h3>
+                    <h4>Capacity: {capacity} Artists</h4>
+                    <Button onClick={editHandler} className="semanticButton" basic>
                         Edit
+                    </Button>
+                    <Button onClick={viewHandler} className="semanticButton" basic>
+                        View
                     </Button>
                 </div>
             </div>
