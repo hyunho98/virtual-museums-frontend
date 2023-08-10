@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from "react"
-import { useParams, Redirect } from 'react-router-dom'
-import { Form, Button } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Form } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 
-function MuseumEdit({ museums, setMuseums }) {
-    useEffect(() => {
-        fetch(`http://localhost:9292/museums/${params.id}`)
-        .then((response) => response.json())
-        .then((data) => {
-            setName(data.name)
-            setCapacity(data.capacity)
-            setImageLink(data.image_link)
-        })
-    }, [])
-
-    const params = useParams()
+function MuseumCreate({ onCreateMuseum }) {
     const [name, setName] = useState()
     const [capacity, setCapacity] = useState()
     const [imageLink, setImageLink] = useState()
@@ -28,8 +17,8 @@ function MuseumEdit({ museums, setMuseums }) {
             "image_link": imageLink
         }
 
-        fetch(`http://localhost:9292/museums/${params.id}`, {
-            method: 'PATCH',
+        fetch(`http://localhost:9292/museums`,{
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -37,37 +26,23 @@ function MuseumEdit({ museums, setMuseums }) {
         })
             .then((response) => response.json())
             .then((data) => {
-                setMuseums(museums.map((m) => (m.id === data.id) ? data : m))
-                setRedirect(true)
-            }) 
-    }
-
-    function deleteHandler(e) {
-        fetch(`http://localhost:9292/museums/${params.id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response) => response.json())
-            .then(() => {
-                setMuseums(museums.filter((m) => (m.id == params.id) ? false : true))
+                onCreateMuseum(data)
                 setRedirect(true)
             })
     }
 
-    if (redirect) return <Redirect to="/" />
+    if (redirect) return <Redirect to='/' />
 
     return (
         <div>
             <div>
-                <h2>Editing Museum</h2>
-                <h3>{name}</h3>
+                <h2>Creating New Museum</h2>
             </div>
             <div>
                 <Form onSubmit={submitHandler}>
                     <Form.Input
                         onChange={(e) => setName(e.target.value)}
+                        placeholder="name"
                         value={name}
                     />
                     <Form.Input
@@ -79,19 +54,14 @@ function MuseumEdit({ museums, setMuseums }) {
                     />
                     <Form.Input
                         onChange={(e) => setImageLink(e.target.value)}
+                        placeholder="image link"
                         value={imageLink}
                     />
                     <Form.Button>Submit</Form.Button>
                 </Form>
-                <Button 
-                    onClick={deleteHandler} 
-                    color="red" 
-                    style={{margin: "20px"}}>
-                    Delete Museum
-                </Button>
             </div>
         </div>
     )
 }
 
-export default MuseumEdit
+export default MuseumCreate

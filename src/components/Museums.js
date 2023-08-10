@@ -1,18 +1,11 @@
 import "../App.css"
-import React, { useState, useEffect } from "react"
-import { Card, Container } from "semantic-ui-react"
+import React, { useState } from "react"
+import { Card, Container, Button } from "semantic-ui-react"
+import { Redirect } from 'react-router-dom'
 import MuseumCard from './MuseumCard.js'
 
-function Museums() {
-    useEffect (() => {
-        fetch(`http://localhost:9292/museums`)
-            .then((response) => response.json())
-            .then((data) => {
-                setMuseums(data)
-            })
-    }, [])
-
-    const [museums, setMuseums] = useState([])
+function Museums({ museums }) {
+    const [redirect, setRedirect] = useState(false)
     const museumList = museums.map((museum) => 
         <MuseumCard
             key={museum.id}
@@ -23,12 +16,23 @@ function Museums() {
         />
     )
 
+    function clickHandler() {
+        setRedirect(true)
+    }
+
+    if (redirect) return <Redirect to='/museums/create' />
+
     return (
-        <Container className="tileContainer">
-            <Card.Group itemsPerRow={4}>
-                {museumList}
-            </Card.Group>
-        </Container>
+        <div>
+            <Button onClick={clickHandler}> 
+                Create New Museum
+            </Button>
+            <Container className="tileContainer">
+                <Card.Group itemsPerRow={4}>
+                    {museumList}
+                </Card.Group>
+            </Container>
+        </div>
     )
 }
 
