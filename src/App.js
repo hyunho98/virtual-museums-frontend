@@ -6,6 +6,9 @@ import MuseumCreate from './components/MuseumCreate'
 import MuseumView from './components/MuseumView'
 import ArtistEdit from './components/ArtistEdit'
 import ArtistCreate from './components/ArtistCreate'
+import ArtistView from './components/ArtistView'
+import ArtEdit from './components/ArtEdit'
+import ArtCreate from './components/ArtCreate'
 import React, { useState, useEffect } from "react"
 import { Route, Switch } from "react-router-dom"
 
@@ -34,6 +37,10 @@ function App() {
     setArtists([...artists, artist])
   }
 
+  function onCreateArtPiece(artPiece) {
+    setArtPieces([...artPieces, artPiece])
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -59,6 +66,15 @@ function App() {
           </Route>
           <Route exact path="/artists/create">
             <ArtistCreate onCreateArtist={onCreateArtist} />
+          </Route>
+          <Route exact path="/artists/:id">
+            <ArtistView />
+          </Route>
+          <Route exact path="/art_pieces/:id/edit">
+            <ArtEdit artPieces={artPieces} setArtPieces={setArtPieces} />
+          </Route>
+          <Route exact path="/art_pieces/create">
+            <ArtCreate onCreateArtPiece={onCreateArtPiece} />
           </Route>
         </Switch>
       </div>

@@ -9,10 +9,10 @@ function ArtistView() {
     useEffect(() => {
         fetch(`http://localhost:9292/artists/${params.id}`)
             .then((response) => response.json())
-            .then((data) => {
-                setArtist(data)
-                setArtPieces(data.art_pieces)
-            })
+            .then((data) => setArtist(data))
+        fetch(`http://localhost:9292/artists/${params.id}/by_date`)
+            .then((response) => response.json())
+            .then((data) => setArtPieces(data))
     }, [])
 
     const [artist, setArtist] = useState()
@@ -50,4 +50,4 @@ function ArtistView() {
     )
 }
 
-export default Artist
+export default ArtistView
