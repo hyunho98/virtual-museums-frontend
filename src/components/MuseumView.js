@@ -33,7 +33,7 @@ function MuseumView() {
         setRedirect(true)
     }
 
-    if (redirect) return <Redirect to={`/museums/${params.id}/create_artist`} />
+    if (redirect) return <Redirect to={`/artists/create`} />
 
     return (
         <div>

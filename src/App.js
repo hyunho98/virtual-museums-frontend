@@ -4,8 +4,10 @@ import Museums from './components/Museums'
 import MuseumEdit from './components/MuseumEdit'
 import MuseumCreate from './components/MuseumCreate'
 import MuseumView from './components/MuseumView'
+import ArtistEdit from './components/ArtistEdit'
+import ArtistCreate from './components/ArtistCreate'
 import React, { useState, useEffect } from "react"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 
 function App() {
   useEffect (() => {
@@ -28,6 +30,10 @@ function App() {
     setMuseums([...museums, museum])
   }
 
+  function onCreateArtist(artist) {
+    setArtists([...artists, artist])
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -47,6 +53,12 @@ function App() {
           </Route>
           <Route exact path="/museums/:id">
             <MuseumView />
+          </Route>
+          <Route exact path="/artists/:id/edit">
+            <ArtistEdit artists={artists} setArtists={setArtists} />
+          </Route>
+          <Route exact path="/artists/create">
+            <ArtistCreate onCreateArtist={onCreateArtist} />
           </Route>
         </Switch>
       </div>

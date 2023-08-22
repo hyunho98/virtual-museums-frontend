@@ -22,11 +22,12 @@ function MuseumCard({ id, name, capacity, image_link }) {
         <Card>
             <div>
                 <div>
-                    <img src={image_link} alt="missing image" />
+                    <img src={image_link} alt="missing" />
                 </div>
                 <div>
                     <h3>{name}</h3>
                     <h4>Capacity: {capacity} Artists</h4>
+                    <h4>ID No. {id}</h4>
                     <Button onClick={editHandler} className="semanticButton" basic>
                         Edit
                     </Button>

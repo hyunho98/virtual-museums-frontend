@@ -22,12 +22,13 @@ function ArtistCard({ id, name, style, museumName, imageLink }) {
         <Card>
             <div>
                 <div>
-                    <img src={imageLink} alt="missing image" />
+                    <img src={imageLink} alt="missing" />
                 </div>
                 <div>
                     <h3>{name}</h3>
                     <h4>Style: {style}</h4>
                     <h4>Current Museum: {museumName}</h4>
+                    <h4>ID No. {id}</h4>
                     <Button onClick={editHandler} className="semanticButton" basic>
                         Edit
                     </Button>
