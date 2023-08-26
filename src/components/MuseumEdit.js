@@ -14,9 +14,9 @@ function MuseumEdit({ museums, setMuseums }) {
     }, [])
 
     const params = useParams()
-    const [name, setName] = useState()
-    const [capacity, setCapacity] = useState()
-    const [imageLink, setImageLink] = useState()
+    const [name, setName] = useState("")
+    const [capacity, setCapacity] = useState(0)
+    const [imageLink, setImageLink] = useState("")
     const [redirect, setRedirect] = useState(false)
 
     function submitHandler(e) {
