@@ -40,7 +40,7 @@ function ArtistCreate({ onCreateArtPiece }) {
     return (
         <div>
             <div>
-                <h2>Creating New Artist</h2>
+                <h2>Creating New Art Piece</h2>
             </div>
             <div>
                 <Form onSubmit={submitHandler}>
